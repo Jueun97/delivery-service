@@ -1,66 +1,56 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect,useState } from 'react';
+import {ScrollView} from 'react-native';
 import axios from 'axios';
 import ListView from '../../View/Admin/ListView';
 import ipCode from './ipcode';
-import { RefreshControl, View, ScrollView, Text, Alert } from 'react-native';
 
-class List extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			data       : [],
-			list       : [],
-			refreshing : false,
-			counting   : 1
-		};
-	}
-	onRefresh = () => {
-		this.setState({ refreshing: true });
+
+const ListCont = ({navigation,route}) => {
+	const [data, setData] = useState([]);
+	const [list, setList] = useState([]);
+	const [refreshing, setRefreshing] = useState(false);
+
+	useEffect(() => {
+		fetchData().then(data=>getData(data));
+	},[fetchData]);
+
+	const onRefresh = () => {
+		setRefreshing(true);
 		setTimeout(() => {
-			this.FetchData().then(() => {
-				this.setState({ refreshing: false });
+			fetchData().then(() => {
+				setRefreshing(false);
 			});
 		}, 2000);
 	};
-	FetchData = async () => {
+
+	const fetchData = async () => {
 		var ip = ipCode();
 		const { data } = await axios.get(`http://${ip}:3000/User`);
-		this.setState({ data: data });
-
-		this.getData();
+		setData(data);
+		return data
 	};
-	getData() {
-		const { route } = this.props;
+
+	const getData = (data) => {
 		const { destination } = route.params;
-		const { data } = this.state;
 		const list = [];
 		var index = 0;
 
 		for (var i = 0; i < data.length; i++) {
+			console.log(data[i])
 			if (data[i].건물명 === destination) {
 				list[index] = data[i];
 				index++;
 			}
 		}
-		this.setState({ list: list });
+		setList(list);
 	}
+	
+	return (
+		<ScrollView style={{ backgroundColor: '#c2e8ff' }}>
+			<ListView data={list} navigation={navigation} onRefresh={onRefresh} />
+		</ScrollView>
+	);
+};
 
-	componentDidMount() {
-		this.FetchData();
-	}
+export default ListCont;
 
-	render() {
-		const { list } = this.state;
-		const { navigation } = this.props;
-
-		return (
-		
-			(
-				<ScrollView style={{ backgroundColor: '#c2e8ff' }}>
-					<ListView data={list} navigation={navigation} onRefresh={this.onRefresh} />
-				</ScrollView>
-			)
-		);
-	}
-}
-export default List;
