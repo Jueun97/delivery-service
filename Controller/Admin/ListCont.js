@@ -1,4 +1,4 @@
-import React, { Component, useEffect,useState } from 'react';
+import React, {useEffect,useState } from 'react';
 import {ScrollView} from 'react-native';
 import axios from 'axios';
 import ListView from '../../View/Admin/ListView';
@@ -6,7 +6,6 @@ import ipCode from './ipcode';
 
 
 const ListCont = ({navigation,route}) => {
-	const [data, setData] = useState([]);
 	const [list, setList] = useState([]);
 	const [refreshing, setRefreshing] = useState(false);
 
@@ -26,7 +25,6 @@ const ListCont = ({navigation,route}) => {
 	const fetchData = async () => {
 		var ip = ipCode();
 		const { data } = await axios.get(`http://${ip}:3000/User`);
-		setData(data);
 		return data
 	};
 
