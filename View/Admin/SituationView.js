@@ -7,7 +7,7 @@ class SituationView extends Component {
 		userNo : ''
 	};
 	Item = ({ item }) => {
-		const { adminKey } = this.props;
+		const { adminKey }  = this.props.adminKey;
 		return (
 			<View style={styles.item}>
 				<TouchableOpacity
