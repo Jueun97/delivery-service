@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Entypo } from '@expo/vector-icons';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, Alert } from 'react-native';
 import Condition from '../../Controller/Admin/conditionCont';
+
 class SituationView extends Component {
 	state = {
 		userNo : ''

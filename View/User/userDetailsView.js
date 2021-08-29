@@ -105,17 +105,14 @@ const styles = StyleSheet.create({
 	},
 	phone            : {
 		marginTop  : 5,
-		// justifyContent: "center",
 		alignItems : 'center'
 	},
 	finaldestination : {
 		marginTop  : 5,
-		// justifyContent: "center",
 		alignItems : 'center'
 	},
 	document         : {
 		marginTop  : 5,
-		// justifyContent: "center",
 		alignItems : 'center'
 	},
 	button           : {
@@ -123,7 +120,6 @@ const styles = StyleSheet.create({
 		paddingBottom   : 5,
 		borderRadius    : 5,
 		borderWidth     : 1,
-		//width: '',
 		backgroundColor : '#c2e8ff',
 		justifyContent  : 'center',
 		alignItems: 'center',

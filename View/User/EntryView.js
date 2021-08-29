@@ -1,8 +1,5 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+import React from 'react';
 import { View, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
-import ipCode from '../../Controller/Admin/ipcode';
-import { Entypo, FontAwesome } from '@expo/vector-icons';
 
 export default class MyCodeView extends React.Component {
 	render() {

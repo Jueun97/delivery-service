@@ -1,17 +1,13 @@
 import React from 'react';
 import MapView, { Marker } from 'react-native-maps';
-import { StyleSheet, Text, View, Dimensions, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet,View, Dimensions, Image} from 'react-native';
 
 export default class Map extends React.Component {
-	componentDidMount() {
-		//console.log('ViewMount');
-	}
 	render() {
-		//console.log('ViewRender');
 		const { lat, lon } = this.props;
 		var Lat = parseFloat(lat);
 		var Lon = parseFloat(lon);
-		//console.log('>>>>>>', Lat, typeof Lat);
+
 		return (
 			<View style={styles.container}>
 				<MapView
@@ -30,7 +26,6 @@ export default class Map extends React.Component {
 						description={'testing'}
 					>
 						<Image style={{ width: 40, height: 40 }} source={require('./드론.png')} />
-						{/*console.log('ViewIcon', Lat, '+', Lon)*/}
 					</Marker>
 				</MapView>
 			</View>

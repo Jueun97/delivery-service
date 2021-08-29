@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, ImageBackground, Alert } from 'react-native';
-import { Notifications } from 'expo';
-import * as Permissions from 'expo-permissions';
+import { StyleSheet, Text, View, ImageBackground } from 'react-native';
 
 class DetailsView extends Component {
 	state = {

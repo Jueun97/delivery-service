@@ -1,8 +1,5 @@
 import React from 'react';
-import axios from 'axios';
-import { Entypo, FontAwesome } from '@expo/vector-icons';
 import { StyleSheet, View, Text, FlatList, TouchableOpacity } from 'react-native';
-import ipCode from '../../Controller/Admin/ipcode';
 
 class UserView extends React.Component {
 	Item = ({ item }) => {

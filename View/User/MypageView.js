@@ -1,8 +1,6 @@
 import React from 'react';
-import axios from 'axios';
-import { Entypo, FontAwesome } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons';
 import { StyleSheet, View, Text, FlatList, TouchableOpacity, Alert } from 'react-native';
-import ipCode from '../../Controller/Admin/ipcode';
 
 export default class MypageView extends React.Component {
 	mapAvailable(deliveryStatus) {

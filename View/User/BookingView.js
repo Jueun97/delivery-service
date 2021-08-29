@@ -1,16 +1,11 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Image, Text, TouchableOpacity, Button, Alert } from 'react-native';
-import { TextInput, TouchableHighlight, ScrollView } from 'react-native-gesture-handler';
-import { Notifications } from 'expo';
-import { Entypo, FontAwesome } from '@expo/vector-icons';
-import * as Permissions from 'expo-permissions';
-import ipCode from '../../Controller/Admin/ipcode';
-import axios from 'axios';
+import { StyleSheet, View,Text } from 'react-native';
+import { TextInput, TouchableHighlight} from 'react-native-gesture-handler';
 
 export default class BookView extends Component {
 
 	render() {
-		const { building, paper } = this.props;
+		const { paper } = this.props;
  		return (
 			<View style={styles.container}>
 				<View style={{ flex: 6 }}>
@@ -164,22 +159,18 @@ const styles = StyleSheet.create({
 	},
 	Phone            : {
 		marginTop  : 5,
-		// justifyContent: "center",
 		alignItems : 'center'
 	},
 	phone            : {
 		marginTop  : 5,
-		// justifyContent: "center",
 		alignItems : 'center'
 	},
 	finaldestination : {
 		marginTop  : 5,
-		// justifyContent: "center",
 		alignItems : 'center'
 	},
 	document         : {
 		marginTop  : 5,
-		// justifyContent: "center",
 		alignItems : 'center'
 	},
 	input            : {
