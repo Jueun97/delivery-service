@@ -1,31 +1,24 @@
-import React, { Component } from 'react';
-import { StyleSheet, View, Image, Text, TouchableOpacity, Button, Alert } from 'react-native';
-import { TextInput, TouchableHighlight, ScrollView } from 'react-native-gesture-handler';
-import { Notifications } from 'expo';
-import { Entypo, FontAwesome } from '@expo/vector-icons';
-import * as Permissions from 'expo-permissions';
+import React, { useState } from 'react';
+import { Alert } from 'react-native';
 import ipCode from '../Admin/ipcode';
 import axios from 'axios';
 import UpdateView from '../../View/User/UpdateView';
-export default class Update extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			apiData       : [],
-			expoPushToken : ''
-		};
-	}
-	getData = async () => {
+
+const Update = (props) => {
+	const [data, setData] = useState(data);
+	const { list } = props.route.params;
+
+	const fetchData = async () => {
 		var ip = ipCode();
 		const { data } = await axios.get(`http://${ip}:3000/delivery`);
-		this.setState({ data });
+		setData(data);
 	};
-	checkPaper(building, prevPaper, doc) {
-		var checking;
-		const data = this.state.data;
-		for (var i = 0; i < data.length; i++) {
-			if (data[i].건물명 == building) {
-				checking = parseInt(doc) + parseInt(data[i].서류현황) - parseInt(prevPaper);
+	const checkPaper = (building, prevPaper, doc) => {
+		let checking;
+		const tempData = [...data];
+		for (var i = 0; i < tempData.length; i++) {
+			if (tempData[i].건물명 == building) {
+				checking = parseInt(doc) + parseInt(tempData[i].서류현황) - parseInt(prevPaper);
 				console.log(prevPaper);
 			}
 		}
@@ -35,9 +28,8 @@ export default class Update extends Component {
 			return 0;
 		}
 	}
-	saveButton = async (list, name, phone, desti_1, doc) => {
-		this.getData();
-		this.setState({ check: false });
+	const saveButton = async (list, name, phone, desti_1, doc) => {
+		fetchData();
 		if (name == null) name = list.이름;
 		if (phone == null) phone = list.전화번호;
 		if (desti_1 == null) desti_1 = list.배송지;
@@ -47,7 +39,7 @@ export default class Update extends Component {
 		var building = list.건물명;
 		var prevPaper = list.서류수량;
 		var ip = ipCode();
-		var checking = this.checkPaper(building, prevPaper, doc);
+		var checking = checkPaper(building, prevPaper, doc);
 		if (checking != 0) {
 			fetch(`http://${ip}:3000/update`, {
 				method  : 'POST',
@@ -73,7 +65,7 @@ export default class Update extends Component {
 						text    : 'OK',
 						onPress : () => {
 							list.이름 = null;
-							this.props.navigation.navigate('ShowInfo', {
+							props.navigation.navigate('ShowInfo', {
 								name       : name,
 								phone      : phone,
 								desti      : desti_1,
@@ -94,11 +86,10 @@ export default class Update extends Component {
 			]);
 		}
 	};
-	componentDidMount() {}
-	render() {
-		const { list } = this.props.route.params;
-		return (
-			<UpdateView list={list}  navigation={this.props.navigation} saveButton={this.saveButton} />
-		);
-	}
-}
+
+	return (
+		<UpdateView list={list} navigation={props.navigation} saveButton={saveButton} />
+	);
+};
+
+export default Update;
