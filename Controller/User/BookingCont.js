@@ -1,41 +1,39 @@
-import React, { Component } from 'react';
-import { StyleSheet, View, Image, Text, TouchableOpacity, Button, Alert } from 'react-native';
-import { TextInput, TouchableHighlight, ScrollView } from 'react-native-gesture-handler';
+import React, { useEffect,useState } from 'react';
+import { Alert } from 'react-native';
 import { Notifications } from 'expo';
-import { Entypo, FontAwesome } from '@expo/vector-icons';
-import * as Permissions from 'expo-permissions';
 import ipCode from '../Admin/ipcode';
 import axios from 'axios';
 import BookingView from '../../View/User/BookingView';
-export default class Book extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			apiData       : [],
-			expoPushToken : ''
-		};
-	}
-	getData = async () => {
+
+const Book = (props) => {
+	const [data, setData] = useState([]);
+	const [paper, setPaper] = useState('')
+	const building = props.route.params.building;
+
+	useEffect(() => {
+		getData();
+	}, [getData]);
+
+	const getData = async () => {
 		var ip = ipCode();
 		const { data } = await axios.get(`http://${ip}:3000/delivery`);
-		this.getPaperInfo(data);
-		this.setState({ data });
+		getPaperInfo(data);
+		setData(data);
 	};
-	getPaperInfo(data) {
-		const { building } = this.props.route.params;
+	const getPaperInfo = (data) => {
 		let paper;
-		for (let i = 0; i < data.length; i++){
+		for (let i = 0; i < data.length; i++) {
 			if (data[i].건물명 == building)
 				paper = data[i].서류현황
 		}
-		paper = `${100-paper}/100`;
-		this.setState({ building,paper });
+		paper = `${100 - paper}/100`;
+		setPaper(paper);
 		
 	}
-	checkPaper(building, doc) {
+	const checkPaper = (building, doc) => {
 		console.log('checking', building, doc);
-		var checking,paper;
-		const totalPaper = this.state.data;
+		var checking, paper;
+		const totalPaper = [...data];
 		for (var i = 0; i < totalPaper.length; i++) {
 			if (totalPaper[i].건물명 == building) {
 				checking = parseInt(doc) + parseInt(totalPaper[i].서류현황);
@@ -48,33 +46,32 @@ export default class Book extends Component {
 			return 0;
 		}
 	}
-	checkInfo(name, phone, desti_1, doc) {
+	const checkInfo = (name, phone, desti_1, doc) => {
 		if (name != null && phone != null && desti_1 != null && doc != null) return true;
 		else return false;
 	}
-	saveButton = async (name, phone, desti_1, doc) => {
+	const saveButton = async (name, phone, desti_1, doc) => {
 		//this.getData();
 		console.log('saving..');
 		var ip = ipCode();
-		const { building } = this.props.route.params;
 		let token = await Notifications.getExpoPushTokenAsync();
-		var checkInfo = this.checkInfo(name, phone, desti_1, doc);
-		var check = this.checkPaper(building, doc);
-		if (checkInfo) {
+		var checkInfoVAlue = checkInfo(name, phone, desti_1, doc);
+		var check = checkPaper(building, doc);
+		if (checkInfoVAlue) {
 			if (check == 1) {
 				fetch(`http://${ip}:3000/booking`, {
-					method  : 'POST',
-					headers : {
-						Accept         : 'application/json',
-						'Content-Type' : 'application/json'
+					method: 'POST',
+					headers: {
+						Accept: 'application/json',
+						'Content-Type': 'application/json'
 					},
-					body    : JSON.stringify({
-						Name          : name,
-						Phone         : phone,
-						desti_1       : desti_1,
-						doc           : doc,
-						building      : building,
-						expoPushToken : token
+					body: JSON.stringify({
+						Name: name,
+						Phone: phone,
+						desti_1: desti_1,
+						doc: doc,
+						building: building,
+						expoPushToken: token
 					})
 				});
 				Alert.alert(
@@ -82,14 +79,14 @@ export default class Book extends Component {
 					'완료되었습니다',
 					[
 						{
-							text    : 'OK',
-							onPress : () => {
-								this.props.navigation.navigate('ShowInfo', {
-									name       : name,
-									phone      : phone,
-									desti      : desti_1,
-									doc        : doc,
-									navigation : 'User'
+							text: 'OK',
+							onPress: () => {
+								props.navigation.navigate('ShowInfo', {
+									name: name,
+									phone: phone,
+									desti: desti_1,
+									doc: doc,
+									navigation: 'User'
 								});
 							}
 						}
@@ -103,16 +100,9 @@ export default class Book extends Component {
 			Alert.alert('정보 입력 오류', '필수 정보를 모두 입력해주세요!');
 		}
 	};
-	getNotifiCode = async () => {
-		let token = await Notifications.getExpoPushTokenAsync(); //토큰 받아오는 함수
-		this.setState({ expoPushToken: token });
-		Alert.alert('toekn is', this.state.expoPushToken);
-	};
-	componentDidMount() {
-		this.getData();
-	}
-	render() {
-		const {building, paper } = this.state;
-		return  <BookingView saveButton={this.saveButton} building={building} paper ={paper} />;
-	}
-}
+	return (
+		<BookingView saveButton={saveButton} building={building} paper={paper}/>
+	);
+};
+
+export default Book;
