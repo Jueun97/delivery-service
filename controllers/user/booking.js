@@ -1,9 +1,9 @@
 import React, { useEffect,useState } from 'react';
 import { Alert } from 'react-native';
 import { Notifications } from 'expo';
-import ipCode from '../Admin/ipcode';
+import ipCode from '../admin/ipcode';
 import axios from 'axios';
-import BookingView from '../../View/User/BookingView';
+import BookingView from '../../view/user/BookingView';
 
 const Book = (props) => {
 	const [data, setData] = useState([]);

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, ScrollView, Alert, TouchableOpacity } from 'react-native';
-import Condition from '../../Controller/Admin/conditionCont';
-import Notification from '../../Controller/Admin/NotificaionCont';
+import Condition from '../../controllers/admin/condition';
+import Notification from '../../controllers/admin/notification';
 class ListView extends Component {
 	state = {
 		data : []

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Alert } from 'react-native';
-import ipCode from '../Admin/ipcode';
+import ipCode from '../admin/ipcode';
 import axios from 'axios';
-import UpdateView from '../../View/User/UpdateView';
+import UpdateView from '../../view/user/UpdateView';
 
 const Update = (props) => {
 	const [data, setData] = useState(data);

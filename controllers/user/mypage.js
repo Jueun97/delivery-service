@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react';
 import axios from 'axios';
-import ipCode from '../Admin/ipcode';
-import MypageView from '../../View/User/MypageView';
+import ipCode from '../admin/ipcode';
+import MypageView from '../../view/user/MypageView';
 
 const Mypage = (props) => {
 	const [info, setInfo] = useState('');

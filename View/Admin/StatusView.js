@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, Alert } from 'react-native';
-import Condition from '../../Controller/Admin/conditionCont';
+import Condition from '../../controllers/admin/condition';
 
 class SituationView extends Component {
 	state = {

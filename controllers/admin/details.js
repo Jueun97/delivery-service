@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react/cjs/react.development';
-import DetailsView from '../../View/Admin/DetailsView';
+import DetailsView from '../../view/admin/DetailsView';
 
 const DetailsCont = ({navigation,route}) => {
 	const [userInform, setUserInform] = useState([]);

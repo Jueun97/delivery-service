@@ -2,8 +2,8 @@ import React, { useEffect,useState } from 'react';
 import { Alert } from 'react-native';
 import { Entypo } from '@expo/vector-icons';
 import axios from 'axios';
-import ipCode from '../Admin/ipcode';
-import DetailsView from '../../View/User/userDetailsView';
+import ipCode from '../admin/ipcode';
+import DetailsView from '../../view/user/userDetailsView';
 
 const Detail = (props) => {
 	const [time, setTime] = useState('');

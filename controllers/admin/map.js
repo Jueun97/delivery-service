@@ -1,6 +1,6 @@
 import React, { Component, useEffect, useState } from 'react';
 import axios from 'axios';
-import Map from '../../View/Admin/mapView';
+import Map from '../../view/admin/mapView';
 import { Entypo } from '@expo/vector-icons';
 import ipCode from './ipcode';
 
