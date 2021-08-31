@@ -1,83 +1,9 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, ScrollView, Alert, TouchableOpacity } from 'react-native';
-import Condition from '../../controllers/admin/condition';
-import Notification from '../../controllers/admin/notification';
+import { StyleSheet, Text, View, ScrollView,TouchableOpacity } from 'react-native';
 class ListView extends Component {
-	state = {
-		data : []
-	};
-
-	doneHandler = async (UserID, Token, Name) => {
-		Alert.alert('배송상태', '완료하시겠습니까?', [
-			{ text: 'Cancel', onPress: () => console.log('Cancel'), style: 'cancel' },
-			{
-				text    : 'OK',
-				onPress : () => {
-					Condition(UserID, '완료', '배송완료'), Notification(UserID, Token, Name, '배송완료'), this.props.onRefresh();
-				}
-			}
-		]);
-
-		//onPress 'OK'인 경우 사용자 테이블 내의 배송상태값 완료로 변경
-	};
-	doneAllHandler = async (building) => {
-		Alert.alert('배송상태', '전체완료하시겠습니까?', [
-			{ text: 'Cancel', onPress: () => console.log('Cancel'), style: 'cancel' },
-			{
-				text    : 'OK',
-				onPress : () => {
-					Condition(0, building, '배송완료'),
-						Notification(0, this.props.data, '', '배송완료'),
-						this.props.onRefresh();
-				}
-			}
-		]);
-
-		//onPress 'OK'인 경우 사용자 테이블 내의 배송상태값 완료로 변경
-	};
-	cancelAllHandler = async (building) => {
-		Alert.alert(
-			'배송상태',
-			'전체취소하시겠습니까?',
-			[
-				{ text: 'Cancel', onPress: () => console.log('Cancel'), style: 'cancel' },
-				{
-					text    : 'OK',
-					onPress : () => {
-						Condition(0, building, '배송취소'),
-							Notification(0, this.props.data, '', '배송취소'),
-							this.props.onRefresh();
-					}
-				}
-			],
-			{ cancelable: false }
-		);
-
-		//onPress 'OK'인 경우 사용자 테이블 내의 배송상태값 취소로 변경
-	};
-	cancelHandler = async (UserID, Token, Name) => {
-		Alert.alert(
-			'배송상태',
-			'취소하시겠습니까?',
-			[
-				{ text: 'Cancel', onPress: () => console.log('Cancel'), style: 'cancel' },
-				{
-					text    : 'OK',
-					onPress : () => {
-						Condition(UserID, '취소', '배송취소'),
-							Notification(UserID, Token, Name, '배송취소'),
-							this.props.onRefresh();
-					}
-				}
-			],
-			{ cancelable: false }
-		);
-
-		//onPress 'OK'인 경우 사용자 테이블 내의 배송상태값 취소로 변경
-	};
 
 	render() {
-		const condition = {
+		const state = {
 			배송완료  : {
 				okColor : 'red',
 				noColor : 'grey'
@@ -114,12 +40,12 @@ class ListView extends Component {
 							}}
 						>
 							<View style={styles.headerButton}>
-								<Text style={styles.headerText} onPress={() => this.doneAllHandler(data[0].건물명)}>
+								<Text style={styles.headerText} onPress={() => this.props.doneAllHandler(data[0].건물명)}>
 									전체완료
 								</Text>
 							</View>
 							<View style={styles.headerButton}>
-								<Text style={styles.headerText} onPress={() => this.cancelAllHandler(data[0].건물명)}>
+								<Text style={styles.headerText} onPress={() => this.props.cancelAllHandler(data[0].건물명)}>
 									전체취소
 								</Text>
 							</View>
@@ -152,17 +78,17 @@ class ListView extends Component {
 									<View style={styles.listButton}>
 										<View>
 											<Text
-												style={{ fontSize: 20, color: condition[item.배송현황].okColor }}
-												onPress={() => this.doneHandler(item.주문자번호, item.알림코드, item.이름)}
+												style={{ fontSize: 20, color: state[item.배송현황].okColor }}
+												onPress={() => this.props.doneHandler(item.주문자번호, item.알림코드, item.이름)}
 											>
 												완료
 											</Text>
 										</View>
 										<View>
 											<Text
-												style={{ fontSize: 20, color: condition[item.배송현황].noColor }}
+												style={{ fontSize: 20, color: state[item.배송현황].noColor }}
 												s
-												onPress={() => this.cancelHandler(item.주문자번호, item.알림코드, item.이름)}
+												onPress={() => this.props.cancelHandler(item.주문자번호, item.알림코드, item.이름)}
 											>
 												취소
 											</Text>
@@ -187,14 +113,12 @@ const styles = StyleSheet.create({
 	header            : {
 		flex            : 1,
 		justifyContent  : 'center',
-		/* 		backgroundColor : '#EFF8FB', */
 		paddingVertical : 20
 	},
 	headerSub         : {
 		flexDirection   : 'row',
 		backgroundColor : '#ffffff'
 
-		/* 	backgroundColor   : '#EFF8FB' */
 	},
 	headerView        : {
 		flexDirection  : 'row',
