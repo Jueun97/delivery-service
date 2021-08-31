@@ -1,29 +1,15 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, Alert } from 'react-native';
-import Condition from '../../controllers/admin/condition';
 
 class SituationView extends Component {
-	state = {
-		userNo : ''
-	};
 	Item = ({ item }) => {
-		const { adminKey } = this.props;
-		var status = '배송준비중';
+		const { bookingStateHandler } = this.props;
+		let status = '배송준비중';
 		return (
 			<View style={styles.item}>
 				<TouchableOpacity
 					style={styles.touch}
-					onPress={() => {
-						Alert.alert(item.건물명, '배송 시작하시겠습니까?', [
-							{ text: 'Cancel' },
-							{
-								text    : 'OK',
-								onPress : () => {
-									Condition(0, item.건물명, '배송중');
-								}
-							}
-						]);
-					}}
+					onPress={bookingStateHandler(item.건물명)}
 				>
 					<View style={styles.name}>
 						<Text style={styles.contentText}>

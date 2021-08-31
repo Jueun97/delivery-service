@@ -14,7 +14,7 @@ class SituationView extends Component {
 					style={styles.touch}
 					onPress={() => {
 						if (item.건물명 == adminKey) {
-							this.props.navigation.navigate('List', {
+							this.props.navigation.navigate('BookingList ', {
 								destination : adminKey
 							});
 						} else alert('담당 건물이 아닙니다.');
