@@ -1,8 +1,8 @@
 import React, {useEffect,useState } from 'react';
 import { ScrollView, Alert } from 'react-native';
 import axios from 'axios';
-import ListView from '../../view/admin/ListView';
-import ipCode from './ipcode';
+import ListView from '../view/bookingListView';
+import ipCode from './admin/ipcode';
 
 
 const ListCont = ({navigation,route}) => {

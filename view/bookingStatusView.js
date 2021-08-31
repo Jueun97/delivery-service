@@ -1,24 +1,15 @@
 import React, { Component } from 'react';
-import { Entypo } from '@expo/vector-icons';
-import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, Alert } from 'react-native';
 
-class SituationView extends Component {
-	state = {
-		userNo : ''
-	};
+class BookingStatusView extends Component {
 	Item = ({ item }) => {
-		const { adminKey }  = this.props.adminKey;
+		const { bookingStateHandler } = this.props;
+		let status = '배송준비중';
 		return (
 			<View style={styles.item}>
 				<TouchableOpacity
 					style={styles.touch}
-					onPress={() => {
-						if (item.건물명 == adminKey) {
-							this.props.navigation.navigate('BookingList ', {
-								destination : adminKey
-							});
-						} else alert('담당 건물이 아닙니다.');
-					}}
+					onPress={bookingStateHandler(item.건물명)}
 				>
 					<View style={styles.name}>
 						<Text style={styles.contentText}>
@@ -36,7 +27,7 @@ class SituationView extends Component {
 						justifyContent : 'center'
 					}}
 				>
-					<Entypo name="location" size={25} onPress={() => this.props.navigation.navigate('Map')} />
+					<Text>{status}</Text>
 				</View>
 			</View>
 		);
@@ -56,7 +47,7 @@ class SituationView extends Component {
 							<Text style={styles.barText}>출발시간</Text>
 						</View>
 						<View style={styles.icon}>
-							<Text style={styles.barText}>위치</Text>
+							<Text style={styles.barText}>배송상태</Text>
 						</View>
 					</View>
 					<View style={styles.Bottombar} />
@@ -69,7 +60,7 @@ class SituationView extends Component {
 	}
 }
 
-export default SituationView;
+export default BookingStatusView;
 
 const styles = StyleSheet.create({
 	container   : {

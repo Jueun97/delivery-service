@@ -3,7 +3,7 @@ import { View, StyleSheet, Button } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { useEffect } from 'react/cjs/react.development';
 
-const QRCode = (props) => {
+const QrcodeController = (props) => {
 	const [hasPermission, setHasPermission] = useState(null);
 	const [scanned, setScanned] = useState(false);
 
@@ -45,6 +45,6 @@ const QRCode = (props) => {
 	);
 };
 
-export default QRCode;
+export default QrcodeController;
 
 

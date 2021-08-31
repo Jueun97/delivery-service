@@ -1,9 +1,9 @@
 import React, { useEffect,useState } from 'react';
 import { Alert } from 'react-native';
 import { Notifications } from 'expo';
-import ipCode from '../admin/ipcode';
+import ipCode from './admin/ipcode';
 import axios from 'axios';
-import BookingFormView from '../../view/user/bookingFormView';
+import BookingFormView from '../view/bookingFormView';
 
 const BookingController = (props) => {
 	const [data, setData] = useState([]);

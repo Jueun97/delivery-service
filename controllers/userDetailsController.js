@@ -2,10 +2,10 @@ import React, { useEffect,useState } from 'react';
 import { Alert } from 'react-native';
 import { Entypo } from '@expo/vector-icons';
 import axios from 'axios';
-import ipCode from '../admin/ipcode';
-import DetailsView from '../../view/user/userDetailsView';
+import ipCode from './admin/ipcode';
+import DetailsView from '../view/userDetailsView';
 
-const Detail = (props) => {
+const UserDetailsController = (props) => {
 	const [time, setTime] = useState('');
 	const [disable, setDisable] = useState(false);
 	const {list} = props.route.params;
@@ -112,4 +112,4 @@ const Detail = (props) => {
 	);
 };
 
-export default Detail;
+export default UserDetailsController;

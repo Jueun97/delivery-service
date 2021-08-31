@@ -1,9 +1,9 @@
 import React, { useState,useEffect } from 'react';
 import axios from 'axios';
-import ipCode from '../admin/ipcode';
-import MypageView from '../../view/user/MypageView';
+import ipCode from './admin/ipcode';
+import MypageView from '../view/userMypageView';
 
-const Mypage = (props) => {
+const UserMypageController = (props) => {
 	const [info, setInfo] = useState('');
 	const { adminKey } = props.route.params;
 
@@ -22,5 +22,5 @@ const Mypage = (props) => {
 	)
 };
 
-export default Mypage;
+export default UserMypageController;
 

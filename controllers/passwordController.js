@@ -1,8 +1,8 @@
 import React, { Component, useEffect, useState } from 'react';
 import axios from 'axios';
 import { StyleSheet, Alert } from 'react-native';
-import ipCode from './ipcode';
-import PasswordView from '../../view/passwordView';
+import ipCode from './admin/ipcode';
+import PasswordView from '../view/passwordView';
 
 const PasswordController = (props) => {
 	const [code, setCode] = useState('');
@@ -48,7 +48,7 @@ const PasswordController = (props) => {
 		let check = 0;
 		for (var i = 0; i < userData.length; i++) {
 			if (code == userData[i].전화번호) {
-				props.navigation.navigate('Mypage', { adminKey: userData[i].전화번호 });
+				props.navigation.navigate('UserMypage', { adminKey: userData[i].전화번호 });
 				check = 1;
 			}
 		}

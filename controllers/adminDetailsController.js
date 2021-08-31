@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react/cjs/react.development';
-import DetailsView from '../../view/admin/DetailsView';
+import DetailsView from '../view/adminDetailsView';
 
-const DetailsCont = ({navigation,route}) => {
+const AdminDetailsController = ({navigation,route}) => {
 	const [userInform, setUserInform] = useState([]);
 
 	useEffect(() => {
@@ -23,4 +23,4 @@ const DetailsCont = ({navigation,route}) => {
 	);
 };
 
-export default DetailsCont;
+export default AdminDetailsController;

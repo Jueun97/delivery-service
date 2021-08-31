@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, ImageBackground } from 'react-native';
 
-class DetailsView extends Component {
+class AdminDetailsView extends Component {
 	state = {
 		expoPushToken : ''
 	};
@@ -75,7 +75,7 @@ class DetailsView extends Component {
 	}
 }
 
-export default DetailsView;
+export default AdminDetailsView;
 
 const styles = StyleSheet.create({
 	container     : {

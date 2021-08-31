@@ -2,7 +2,7 @@ import React from 'react';
 import { Entypo } from '@expo/vector-icons';
 import { StyleSheet, View, Text, FlatList, TouchableOpacity, Alert } from 'react-native';
 
-export default class MypageView extends React.Component {
+export default class UserMypageView extends React.Component {
 	mapAvailable(deliveryStatus) {
 		if (deliveryStatus == '배송중') {
 			this.props.navigation.navigate('Map');

@@ -1,20 +1,21 @@
 import React, { useEffect,useState } from 'react';
 import axios from 'axios';
-import SituationView from '../../view/admin/SituationView';
-import StatusView from '../../view/admin/StatusView';
-import ipCode from './ipcode';
+import StateView from '../view/bookingStateView';
+import StatusView from '../view/bookingStatusView';
+import UserView from '../../view/user/UserView';
+import ipCode from './admin/ipcode';
 
 const BookingStateController = ({navigation,route}) => {
 	const [info, setInfo] = useState('');
 	const adminKey = route.params.adminKey;
 	const status = route.params.status;
+	const ip = ipCode();
 
 	useEffect(() => {
 		fetchData();
 	}, [fetchData]);
 
 	const fetchData = async () => {
-		var ip = ipCode();
 		const { data } = await axios.get(`http://${ip}:3000/Delivery`);
 		setInfo(data);
 	};
@@ -42,8 +43,9 @@ const BookingStateController = ({navigation,route}) => {
 	}
 	return (
 		<>
-			{status === 'situation' ? <SituationView data={info} adminKey={adminKey} navigation={navigation} />
-			: <StatusView data={info} adminKey={adminKey} navigation={navigation} bookingStateHandler={bookingStateHandler} />}
+			{status === 'situation' && <StateView data={info} adminKey={adminKey} navigation={navigation} />}
+			{status === 'status' && <StatusView data={info} adminKey={adminKey} navigation={navigation} bookingStateHandler={bookingStateHandler} />}
+			{status === 'user' && 	<UserView info={info} navigation={props.navigation} />}
 		</>
 	)
 

@@ -2,7 +2,7 @@ import React from 'react';
 import MapView, { Marker } from 'react-native-maps';
 import { StyleSheet,View, Dimensions, Image} from 'react-native';
 
-export default class Map extends React.Component {
+export default class MapView extends React.Component {
 	render() {
 		const { lat, lon } = this.props;
 		var Lat = parseFloat(lat);

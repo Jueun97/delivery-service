@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text, ImageBackground, Alert } from 'react-native';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 
-export default class DetailsView extends Component {
+export default class UserDetailsView extends Component {
 	checkIfAvailable(check, disable, list) {
 		const navigation = this.props.navigation;
 		console.log('>>>', disable);

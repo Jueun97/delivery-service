@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, ScrollView,TouchableOpacity } from 'react-native';
-class ListView extends Component {
+class BookingListView extends Component {
 
 	render() {
 		const state = {
@@ -103,7 +103,7 @@ class ListView extends Component {
 		);
 	}
 }
-export default ListView;
+export default BookingListView;
 
 const styles = StyleSheet.create({
 	container         : {
