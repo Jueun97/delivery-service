@@ -1,6 +1,6 @@
 import React, { useState,useEffect } from 'react';
 import axios from 'axios';
-import ipCode from './admin/ipcode';
+import ipcode from '../ipcode';
 import MypageView from '../view/userMypageView';
 
 const UserMypageController = (props) => {
@@ -12,7 +12,7 @@ const UserMypageController = (props) => {
 	});
 
 	fetchData = async () => {
-		var ip = ipCode();
+		var ip = ipcode();
 		const { data } = await axios.get(`http://${ip}:3000/User`);
 		setInfo(data);
 	};

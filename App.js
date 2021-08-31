@@ -1,6 +1,6 @@
 import React, {useState,useEffect } from 'react';
-import Loading from './Loading';
-import Navigation from './navigation';
+import Loading from './src/Loading';
+import Navigation from './src/navigation';
 
 export default function App() {
 	const [isLoading, setIsLoading] = useState(true);

@@ -1,21 +1,21 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
-import AdminPassword from './controllers/admin/passwordController';
-import User from './controllers/user/user';
+import AdminPassword from './controllers/passwordController';
+import User from './controllers/bookingStateController';
 import home from './home';
-import BookingList from './controllers/admin/bookingListController';
-import Details from './controllers/admin/details';
-import Booking from './controllers/user/bookingController';
-import Mypage from './controllers/user/mypage';
-import UserPassword from './controllers/user/passwordController';
-import userDetails from './controllers/user/userDetails';
-import Update from './controllers/user/bookingController';
-import Map from './controllers/admin/map';
-import QRCode from './controllers/user/qrcode';
-import ShowInfo from './view/user/ShowInfo';
-import Status from './controllers/admin/bookingStateController';
-import Situation from './controllers/admin/bookingStateController';
+import BookingList from './controllers/bookingListController';
+import Details from './controllers/adminDetailsController';
+import Booking from './controllers/bookingController';
+import UserMypage from './controllers/userMypageController';
+import UserPassword from './controllers/passwordController';
+import userDetails from './controllers/userDetailsController';
+import Update from './controllers/bookingController';
+import Map from './controllers/mapController';
+import QRCode from './controllers/qrcodeController';
+import ShowInfo from './view/ShowInfo';
+import Status from './controllers/bookingStateController';
+import Situation from './controllers/bookingStateController';
 import setHeader from './controllers/setHeader';
 import { Entypo, FontAwesome } from '@expo/vector-icons';
 
@@ -36,8 +36,8 @@ const Controller = () => {
             options={({ navigation }) => setHeader(navigation,'예약하기',Entypo)}
         />
         <Stack.Screen
-            name="Mypage"
-            component={Mypage}
+            name="UserMypage"
+            component={UserMypage}
             options={({ navigation }) => setHeader(navigation,'마이페이지',Entypo)}
         />
         <Stack.Screen
@@ -103,7 +103,7 @@ const Controller = () => {
         />
         <Stack.Screen
             name="BookingList "
-            component={BookingList }
+            component={BookingList}
             options={({ navigation }) => setHeader(navigation,'예약자 리스트',Entypo)}
         />
         <Stack.Screen

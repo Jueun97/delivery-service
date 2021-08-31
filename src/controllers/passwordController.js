@@ -1,7 +1,7 @@
 import React, { Component, useEffect, useState } from 'react';
 import axios from 'axios';
 import { StyleSheet, Alert } from 'react-native';
-import ipCode from './admin/ipcode';
+import ipcode from '../ipcode';
 import PasswordView from '../view/passwordView';
 
 const PasswordController = (props) => {
@@ -9,7 +9,7 @@ const PasswordController = (props) => {
 	const [adminData, setAdminData] = useState([]);
 	const [userData, setUserData] = useState([]);
 	const { status } = props.route.params;
-	const ip = ipCode();
+	const ip = ipcode();
 
 	useEffect(() => {
 		if (status === 'admin')

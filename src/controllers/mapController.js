@@ -2,7 +2,7 @@ import React, { Component, useEffect, useState } from 'react';
 import axios from 'axios';
 import Map from '../view/mapView';
 import { Entypo } from '@expo/vector-icons';
-import ipCode from './admin/ipcode';
+import ipcode from '../ipcode';
 
 const MapCont = ({ navigation }) => {
 	const [lat, setLat] = useState(0);
@@ -24,7 +24,7 @@ const MapCont = ({ navigation }) => {
 	};
 
 	const fetchData = async () => {
-		var ip = ipCode();
+		var ip = ipcode();
 		const { data } = await axios.get(`http://${ip}:3001/`);
 		setLat(data[0].lat);
 		setLon(data[1].lon);

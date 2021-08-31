@@ -2,14 +2,14 @@ import React, { useEffect,useState } from 'react';
 import axios from 'axios';
 import StateView from '../view/bookingStateView';
 import StatusView from '../view/bookingStatusView';
-import UserView from '../../view/user/UserView';
-import ipCode from './admin/ipcode';
+import UserView from '../view/user/UserView';
+import ipcode from '../ipcode';
 
 const BookingStateController = ({navigation,route}) => {
 	const [info, setInfo] = useState('');
 	const adminKey = route.params.adminKey;
 	const status = route.params.status;
-	const ip = ipCode();
+	const ip = ipcode();
 
 	useEffect(() => {
 		fetchData();

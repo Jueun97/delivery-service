@@ -1,7 +1,7 @@
 import React, { useEffect,useState } from 'react';
 import { Alert } from 'react-native';
 import { Notifications } from 'expo';
-import ipCode from './admin/ipcode';
+import ipcode from '../ipcode';
 import axios from 'axios';
 import BookingFormView from '../view/bookingFormView';
 
@@ -16,7 +16,7 @@ const BookingController = (props) => {
 	}, [fetchData]);
 
 	const fetchData = async () => {
-		var ip = ipCode();
+		var ip = ipcode();
 		const { data } = await axios.get(`http://${ip}:3000/delivery`);
 		getPaperInfo();
 		setData(data);
@@ -58,7 +58,7 @@ const BookingController = (props) => {
 		var UserID = list.주문자번호;
 		var building = list.건물명;
 		var prevPaper = list.서류수량;
-		var ip = ipCode();
+		var ip = ipcode();
 		var checking = checkPaper(building, prevPaper, doc);
 		if (checking != 0) {
 			fetch(`http://${ip}:3000/update`, {
@@ -110,7 +110,7 @@ const BookingController = (props) => {
 	const upload = async (name, phone, desti_1, doc) => {
 		//this.getData();
 		console.log('saving..');
-		var ip = ipCode();
+		var ip = ipcode();
 		let token = await Notifications.getExpoPushTokenAsync();
 		var checkInfoVAlue = checkInfo(name, phone, desti_1, doc);
 		var check = checkPaper(building, doc);

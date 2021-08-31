@@ -10,7 +10,7 @@ class Home extends React.Component {
 				</View>
 				<View style={styles.booking}>
 					<TouchableOpacity activeOpacity={0.8} style={styles.button}>
-						<Text style={styles.bookingfont} onPress={() => this.props.navigation.navigate('User')}>
+						<Text style={styles.bookingfont} onPress={() => this.props.navigation.navigate('User',{status:'user'})}>
 							Booking
 						</Text>
 					</TouchableOpacity>

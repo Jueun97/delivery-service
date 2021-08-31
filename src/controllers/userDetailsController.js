@@ -2,7 +2,7 @@ import React, { useEffect,useState } from 'react';
 import { Alert } from 'react-native';
 import { Entypo } from '@expo/vector-icons';
 import axios from 'axios';
-import ipCode from './admin/ipcode';
+import ipcode from '../ipcode';
 import DetailsView from '../view/userDetailsView';
 
 const UserDetailsController = (props) => {
@@ -15,7 +15,7 @@ const UserDetailsController = (props) => {
 	}, [fetchData]);
 
 	const fetchData = async (building) => {
-		var ip = ipCode();
+		var ip = ipcode();
 		const { data } = await axios.get(`http://${ip}:3000/delivery`);
 		for (var i = 0; i < data.length; i++) {
 			if (data[i].건물명 == building)
@@ -67,7 +67,7 @@ const UserDetailsController = (props) => {
 	}
 
 	const handleDelete = (UserID, doc, building, navigation) => {
-		var ip = ipCode();
+		var ip = ipcode();
 
 		Alert.alert('에약취소', '진행하시겠습니끼?', [
 			{ text: 'Cancel' },

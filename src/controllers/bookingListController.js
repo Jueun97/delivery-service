@@ -2,13 +2,13 @@ import React, {useEffect,useState } from 'react';
 import { ScrollView, Alert } from 'react-native';
 import axios from 'axios';
 import ListView from '../view/bookingListView';
-import ipCode from './admin/ipcode';
+import ipcode from '../ipcode';
 
 
 const ListCont = ({navigation,route}) => {
 	const [list, setList] = useState([]);
 	const [refreshing, setRefreshing] = useState(false);
-	const ip = ipCode();
+	const ip = ipcode();
 
 	useEffect(() => {
 		fetchData().then(data=>getData(data));
@@ -24,7 +24,7 @@ const ListCont = ({navigation,route}) => {
 	};
 
 	const fetchData = async () => {
-		var ip = ipCode();
+		var ip = ipcode();
 		const { data } = await axios.get(`http://${ip}:3000/User`);
 		return data
 	};
