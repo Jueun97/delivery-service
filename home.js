@@ -18,7 +18,7 @@ class Home extends React.Component {
 				<View style={styles.admin}>
 					<Text
 						style={styles.adminfont}
-						onPress={() => this.props.navigation.navigate('Code', { name: 'yn' })}
+						onPress={() => this.props.navigation.navigate('AdminPassword', { status:'admin' })}
 					>
 						Admin
 					</Text>

@@ -18,7 +18,7 @@ export default class ShowInfo extends Component {
 					name="user"
 					size={40}
 					color={'black'}
-					onPress={() => navigation.navigate('Entry')}
+					onPress={() => navigation.navigate('UserPassword', { status:'user' })}
 					style={{ paddingRight: 20 }}
 				/>
 			)

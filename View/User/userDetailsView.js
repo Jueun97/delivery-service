@@ -8,7 +8,7 @@ export default class DetailsView extends Component {
 		console.log('>>>', disable);
 		if (check == '수정') {
 			if (disable) Alert.alert('예약수정', '수정 불가합니다.');
-			else this.props.navigation.navigate('Update', { list: list });
+			else this.props.navigation.navigate('Update', { list: list,status:'update' });
 		} else {
 			if (disable) Alert.alert('예약취소', '취소 불가합니다.');
 			else this.props.handleDelete(list.주문자번호, list.서류수량, list.건물명, navigation);

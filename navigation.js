@@ -1,21 +1,21 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
-import Code from './controllers/admin/code';
+import AdminPassword from './controllers/admin/passwordController';
 import User from './controllers/user/user';
 import home from './home';
-import List from './controllers/admin/list';
+import BookingList from './controllers/admin/bookingListController';
 import Details from './controllers/admin/details';
-import Booking from './controllers/user/booking';
+import Booking from './controllers/user/bookingController';
 import Mypage from './controllers/user/mypage';
-import Entry from './controllers/user/entry';
+import UserPassword from './controllers/user/passwordController';
 import userDetails from './controllers/user/userDetails';
-import Update from './controllers/user/update';
+import Update from './controllers/user/bookingController';
 import Map from './controllers/admin/map';
 import QRCode from './controllers/user/qrcode';
 import ShowInfo from './view/user/ShowInfo';
-import Status from './controllers/admin/situation';
-import Situation from './controllers/admin/situation';
+import Status from './controllers/admin/bookingStateController';
+import Situation from './controllers/admin/bookingStateController';
 import setHeader from './controllers/setHeader';
 import { Entypo, FontAwesome } from '@expo/vector-icons';
 
@@ -41,8 +41,8 @@ const Controller = () => {
             options={({ navigation }) => setHeader(navigation,'마이페이지',Entypo)}
         />
         <Stack.Screen
-            name="Entry"
-            component={Entry}
+            name="UserPassword"
+            component={UserPassword}
             options={({ navigation }) => setHeader(navigation,'전화번호입력',Entypo)}
         />
         <Stack.Screen
@@ -87,8 +87,8 @@ const Controller = () => {
             options={({ navigation }) => setHeader(navigation,'qrCode',Entypo)}
         />
         <Stack.Screen
-            name="Code"
-            component={Code}
+            name="AdminPassword"
+            component={AdminPassword}
             options={({ navigation }) => setHeader(navigation,'패스워드',Entypo)}
             />
         <Stack.Screen
@@ -102,8 +102,8 @@ const Controller = () => {
             options={({ navigation }) => setHeader(navigation,'예약현황',Entypo)}
         />
         <Stack.Screen
-            name="List"
-            component={List}
+            name="BookingList "
+            component={BookingList }
             options={({ navigation }) => setHeader(navigation,'예약자 리스트',Entypo)}
         />
         <Stack.Screen

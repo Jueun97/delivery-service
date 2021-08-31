@@ -22,7 +22,7 @@ const QRCode = (props) => {
 		const { building } = props.route.params;
 		setScanned(true);
 		if (data == 'https://qrco.de/bbVpz7') {
-			props.navigation.navigate('Booking', { building: building });
+			props.navigation.navigate('Booking', { building: building,status:'upload' });
 		} else alert('nono');
 	};
 	return (
