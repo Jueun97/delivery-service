@@ -5,20 +5,15 @@
 ## 사용 기술
 ### 1. Front-end
 
-|<img src="/readme/logo/html.png" width="150">|<img src="/readme/logo/css.png" width="150">|<img src="/readme/logo/js.png" width="150">|
-|:---: |:---: |:---:|
-|HTML|PostCSS|Javascript|
+|<img src="/readme/logo/html.png" width="150">|<img src="/readme/logo/css.png" width="150">|<img src="/readme/logo/js.png" width="150">|<img src="/readme/logo/react-native.png" width="150">|
+|:---: |:---: |:---:|:---:|
+|HTML|PostCSS|Javascript|React Native|
 
 
 ### 2. Back-end
 |<img src="/readme/logo/node.png" width="150" height="150">|<img src="/readme/logo/express.png" width="150" height="150">|<img src="/readme/logo/mysql.png" width="150" height="150">|
 |:---:|:--:|:--:|
 |Node.js|Express|MySQL|
-
-### 3. Library
-|<img src="/readme/logo/react-native.png" width="150">|
-|:--:|
-|React Native|
 
 <br>
 
