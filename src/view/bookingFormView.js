@@ -31,9 +31,9 @@ export default class BookingFormView extends Component {
 									style={styles.input}
 									placeholder="이름을 입력하세요."
 									onChangeText={(text) => {
-										this.Name = text;
+										this.name = text;
 									}}
-									value={this.Name}
+									value={this.name}
 									maxLength={10}
 									defaultValue={list ? list.이름:''}
 									underlineColorAndroid="transparent"
@@ -64,9 +64,9 @@ export default class BookingFormView extends Component {
 									style={styles.input}
 									placeholder="전화번호를 입력하세요."
 									onChangeText={(text) => {
-										this.Phone = text;
+										this.phone = text;
 									}}
-									value={this.Phone}
+									value={this.phone}
 										maxLength={11}
 										defaultValue={list ? list.전화번호:''}
 									underlineColorAndroid="transparent"
@@ -97,9 +97,9 @@ export default class BookingFormView extends Component {
 									style={styles.input}
 									placeholder="최종목적지를 입력하세요."
 									onChangeText={(text) => {
-										this.desti_1 = text;
+										this.destination = text;
 									}}
-									value={this.desti_1}
+									value={this.destination}
 										maxLength={30}
 										defaultValue={list?list.배송지:''}
 									underlineColorAndroid="transparent"
@@ -130,9 +130,9 @@ export default class BookingFormView extends Component {
 									style={styles.input}
 									placeholder= {paper}
 									onChangeText={(text) => {
-										this.doc = text;
+										this.document = text;
 									}}
-										value={this.doc}
+										value={this.document}
 										defaultValue={list?list.서류수량.toString():''}
 									underlineColorAndroid="transparent"
 								/>
@@ -145,7 +145,7 @@ export default class BookingFormView extends Component {
 					<TouchableHighlight
 						style={styles.button}
 						onPress={() => {
-							this.props.saveButton(this.Name, this.Phone, this.desti_1, this.doc);
+							this.props.saveButton(this.name, this.phone, this.destination, this.document);
 						}}
 					>
 						<Text style={styles.textStyle}>확인</Text>

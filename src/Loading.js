@@ -1,10 +1,10 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, View, Image } from 'react-native';
 
 export default function() {
 	return (
 		<View style={styles.container}>
-			<Image source={require('./JUEUN.png')} style={{ width: 70, height: 70 }} />
+			<Image source={require('../assets/JUEUN.png')} style={{ width: 70, height: 70 }} />
 		</View>
 	);
 	//로고 삽입

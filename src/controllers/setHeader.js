@@ -1,7 +1,7 @@
 import React from 'react';
 import { Entypo } from '@expo/vector-icons';
 
-const setHeader = (navigation,title,Emoji,emojiName) => {
+const setHeader = (navigation, title, Emoji, emojiName) => {
     return (
         {
             title: title,
@@ -16,7 +16,7 @@ const setHeader = (navigation,title,Emoji,emojiName) => {
                     name="home"
                     size={40}
                     color={'black'}
-                    onPress={() => navigation.navigate('home')}
+                    onPress={() => { navigation.navigate('home') }}
                     style={{ paddingLeft: 20 }}
                 />
             ),
@@ -25,7 +25,7 @@ const setHeader = (navigation,title,Emoji,emojiName) => {
                     name={emojiName ? emojiName : "arrow-bold-left"}
                     size={40}
                     color={'black'}
-                    onPress={() => emojiName?navigation.navigate('Entry') : navigation.goBack()}
+                    onPress={() => emojiName?navigation.navigate('UserPassword', { status:'user' }): navigation.goBack()}
                     style={{ paddingRight: 20 }}
                 />
             )

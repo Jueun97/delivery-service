@@ -2,7 +2,7 @@ import React from 'react';
 import MapView, { Marker } from 'react-native-maps';
 import { StyleSheet,View, Dimensions, Image} from 'react-native';
 
-export default class MapView extends React.Component {
+export default class LocationView extends React.Component {
 	render() {
 		const { lat, lon } = this.props;
 		var Lat = parseFloat(lat);
@@ -25,7 +25,7 @@ export default class MapView extends React.Component {
 						title={'his is a map'}
 						description={'testing'}
 					>
-						<Image style={{ width: 40, height: 40 }} source={require('./드론.png')} />
+						<Image style={{ width: 40, height: 40 }} source={require('../../assets/드론.png')} />
 					</Marker>
 				</MapView>
 			</View>

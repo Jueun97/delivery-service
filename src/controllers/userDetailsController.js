@@ -1,34 +1,31 @@
 import React, { useEffect,useState } from 'react';
 import { Alert } from 'react-native';
-import { Entypo } from '@expo/vector-icons';
-import axios from 'axios';
-import ipcode from '../ipcode';
 import DetailsView from '../view/userDetailsView';
+import DataHandler from '../model/dataHandler';
 
 const UserDetailsController = (props) => {
 	const [time, setTime] = useState('');
 	const [disable, setDisable] = useState(false);
-	const {list} = props.route.params;
+	const { list } = props.route.params;
+	const dataHandler = new DataHandler();
 
 	useEffect(() => {
 		fetchData(list.건물명);
 	}, [fetchData]);
 
 	const fetchData = async (building) => {
-		var ip = ipcode();
-		const { data } = await axios.get(`http://${ip}:3000/delivery`);
-		for (var i = 0; i < data.length; i++) {
+		const data = await dataHandler.getDeliveryInfo();
+		for (let i = 0; i < data.length; i++) {
 			if (data[i].건물명 == building)
 				setTime(data[i].배송시간)
 		}
 		checkTime();
 	};
 	const checkTime = () => {
-		var { time } = state;
-		var hours = new Date().getHours();
-		var min = new Date().getMinutes();
-		var hoursU = parseInt(time[0]) * 10 + parseInt(time[1]);
-		var minU = parseInt(time[3]) * 10 + parseInt(time[4]);
+		let hours = new Date().getHours();
+		let min = new Date().getMinutes();
+		let hoursU = parseInt(time[0]) * 10 + parseInt(time[1]);
+		let minU = parseInt(time[3]) * 10 + parseInt(time[4]);
 		if (minU == 0) {
 			if (hours >= hoursU) {
 				setDisable(true);
@@ -41,56 +38,19 @@ const UserDetailsController = (props) => {
 			}
 		}
 	}
-	const setHeaderOptions = (navigation) => {
-		var user = list.주문자번호;
-		navigation.setOptions({
-			title       : user,
-			headerLeft  : () => (
-				<Entypo
-					name="home"
-					size={40}
-					color={'black'}
-					onPress={() => navigation.navigate('home')}
-					style={{ paddingLeft: 20 }}
-				/>
-			),
-			headerRight : () => (
-				<Entypo
-					name="arrow-bold-left"
-					size={40}
-					color={'black'}
-					onPress={() => navigation.goBack()}
-					style={{ paddingRight: 20 }}
-				/>
-			)
-		});
-	}
 
-	const handleDelete = (UserID, doc, building, navigation) => {
-		var ip = ipcode();
-
+	const handleDelete = (userId, document, building, navigation) => {
 		Alert.alert('에약취소', '진행하시겠습니끼?', [
 			{ text: 'Cancel' },
 			{
 				text    : 'OK',
-				onPress : () => {
-					fetch(`http://${ip}:3000/delete`, {
-						method  : 'POST',
-						headers : {
-							Accept         : 'application/json',
-							'Content-Type' : 'application/json'
-						},
-						body    : JSON.stringify({
-							UserID   : UserID,
-							doc      : doc,
-							building : building
-						})
-					});
+				onPress: () => {
+					dataHandler.deleteBooking(userId, document, building);
 					Alert.alert('배송취소', '완료되었습니다', [
 						{
 							text    : 'OK',
 							onPress : () => {
-								navigation.navigate('User');
+								navigation.navigate('User',{status:'user'});
 							}
 						}
 					]);
@@ -99,8 +59,6 @@ const UserDetailsController = (props) => {
 		]);
 	}
 	return (
-		setHeaderOptions(props.navigation),
-		(
 			<DetailsView
 				list={list}
 				time={time}
@@ -108,8 +66,7 @@ const UserDetailsController = (props) => {
 				navigation={props.navigation}
 				handleDelete={handleDelete}
 			/>
-		)
-	);
+		);
 };
 
 export default UserDetailsController;

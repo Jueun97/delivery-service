@@ -1,14 +1,13 @@
-import React, { Component, useEffect, useState } from 'react';
-import axios from 'axios';
+import React, {useEffect, useState } from 'react';
 import Map from '../view/mapView';
-import { Entypo } from '@expo/vector-icons';
-import ipcode from '../ipcode';
+import DataHandler from '../model/dataHandler';
 
-const MapCont = ({ navigation }) => {
+const MapController = ({ navigation }) => {
 	const [lat, setLat] = useState(0);
 	const [lon, setLon] = useState(0);
 	const [refreshing, setRefreshing] = useState(false);
-    
+	const dataHandler = new DataHandler();
+
 	useEffect(() => {
 		fetchData();
 	}, [fetchData]);
@@ -24,37 +23,14 @@ const MapCont = ({ navigation }) => {
 	};
 
 	const fetchData = async () => {
-		var ip = ipcode();
-		const { data } = await axios.get(`http://${ip}:3001/`);
+		const data = await dataHandler.getLocation();
 		setLat(data[0].lat);
 		setLon(data[1].lon);
 		
 	};
-	const setHeaderOptions = (navigation) => {
-		navigation.setOptions({
-			headerLeft: () => (
-				<Entypo
-					name="cw"
-					size={40}
-					color={'black'}
-					onPress={() => this.onRefresh()}
-					style={{ paddingLeft: 20 }}
-				/>
-			),
-			headerRight: () => (
-				<Entypo
-					name="arrow-bold-left"
-					size={40}
-					color={'black'}
-					onPress={() => this.props.navigation.goBack()}
-					style={{ paddingRight: 20 }}
-				/>
-			)
-		});
-	};
-	return (setHeaderOptions(navigation), < Map lat = { lat } lon = { lon } refresh = {onRefresh } />);
+	return ( < Map lat = { lat } lon = { lon } refresh = {onRefresh } />);
 
 };
 
-export default MapCont;
+export default MapController;
 

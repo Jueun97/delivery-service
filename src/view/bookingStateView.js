@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { Entypo } from '@expo/vector-icons';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native';
 
-class bookingStateView extends Component {
+class BookingStateView extends Component {
 	state = {
 		userNo : ''
 	};
 	Item = ({ item }) => {
-		const { adminKey }  = this.props.adminKey;
+		const { adminKey } = this.props;
 		return (
 			<View style={styles.item}>
 				<TouchableOpacity
@@ -69,7 +69,7 @@ class bookingStateView extends Component {
 	}
 }
 
-export default bookingStateView;
+export default BookingStateView;
 
 const styles = StyleSheet.create({
 	container   : {

@@ -1,7 +1,76 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, ScrollView,TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, ScrollView,TouchableOpacity,Alert } from 'react-native';
 class BookingListView extends Component {
+	doneHandler = async (userId, token, name) => {
+		Alert.alert('배송상태', '완료하시겠습니까?', [
+			{ text: 'Cancel', onPress: () => console.log('Cancel'), style: 'cancel' },
+			{
+				text    : 'OK',
+				onPress : () => {
+					this.props.bookingStateHandler(userId, '완료', '배송완료'),
+						this.props.notification(userId, token, name, '배송완료'),
+						this.props.onRefresh();
+				}
+			}
+		]);
 
+		//onPress 'OK'인 경우 사용자 테이블 내의 배송상태값 완료로 변경
+	};
+	doneAllHandler = async (data) => {
+		Alert.alert('배송상태', '전체완료하시겠습니까?', [
+			{ text: 'Cancel', onPress: () => console.log('Cancel'), style: 'cancel' },
+			{
+				text    : 'OK',
+				onPress: () => {
+					this.props.bookingStateHandler(0, data[0].건물명, '배송완료'),
+					this.props.notification(0, data, '', '배송완료'),
+					this.props.onRefresh();
+				}
+			}
+		]);
+
+		//onPress 'OK'인 경우 사용자 테이블 내의 배송상태값 완료로 변경
+	};
+	cancelAllHandler = async (data) => {
+		Alert.alert(
+			'배송상태',
+			'전체취소하시겠습니까?',
+			[
+				{ text: 'Cancel', onPress: () => console.log('Cancel'), style: 'cancel' },
+				{
+					text    : 'OK',
+					onPress : () => {
+						this.props.bookingStateHandler(0, data[0].건물명, '배송취소'),
+							this.props.notification(0, data, '', '배송취소'),
+							this.props.onRefresh();
+					}
+				}
+			],
+			{ cancelable: false }
+		);
+
+		//onPress 'OK'인 경우 사용자 테이블 내의 배송상태값 취소로 변경
+	};
+	cancelHandler = async (userId, token, name) => {
+		Alert.alert(
+			'배송상태',
+			'취소하시겠습니까?',
+			[
+				{ text: 'Cancel', onPress: () => console.log('Cancel'), style: 'cancel' },
+				{
+					text    : 'OK',
+					onPress : () => {
+						this.props.bookingStateHandler(userId, '취소', '배송취소'),
+						this.props.notification(userId, token, name, '배송취소'),
+						this.props.onRefresh();
+					}
+				}
+			],
+			{ cancelable: false }
+		);
+
+		//onPress 'OK'인 경우 사용자 테이블 내의 배송상태값 취소로 변경
+	};
 	render() {
 		const state = {
 			배송완료  : {
@@ -19,6 +88,10 @@ class BookingListView extends Component {
 			배송준비중 : {
 				okColor : 'black',
 				noColor : 'black'
+			},
+			null: {
+				okColor : 'grey',
+				noColor : 'grey'
 			}
 		};
 		const { data, navigation } = this.props;
@@ -40,12 +113,12 @@ class BookingListView extends Component {
 							}}
 						>
 							<View style={styles.headerButton}>
-								<Text style={styles.headerText} onPress={() => this.props.doneAllHandler(data[0].건물명)}>
+								<Text style={styles.headerText} onPress={() => this.doneAllHandler(data)}>
 									전체완료
 								</Text>
 							</View>
 							<View style={styles.headerButton}>
-								<Text style={styles.headerText} onPress={() => this.props.cancelAllHandler(data[0].건물명)}>
+								<Text style={styles.headerText} onPress={() => this.cancelAllHandler(data)}>
 									전체취소
 								</Text>
 							</View>
@@ -79,7 +152,7 @@ class BookingListView extends Component {
 										<View>
 											<Text
 												style={{ fontSize: 20, color: state[item.배송현황].okColor }}
-												onPress={() => this.props.doneHandler(item.주문자번호, item.알림코드, item.이름)}
+												onPress={() => this.doneHandler(item.주문자번호, item.알림코드, item.이름)}
 											>
 												완료
 											</Text>
@@ -88,7 +161,7 @@ class BookingListView extends Component {
 											<Text
 												style={{ fontSize: 20, color: state[item.배송현황].noColor }}
 												s
-												onPress={() => this.props.cancelHandler(item.주문자번호, item.알림코드, item.이름)}
+												onPress={() => this.cancelHandler(item.주문자번호, item.알림코드, item.이름)}
 											>
 												취소
 											</Text>

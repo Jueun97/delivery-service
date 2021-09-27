@@ -9,7 +9,7 @@ class AdminDetailsView extends Component {
 		const { data } = this.props;
 		return (
 			<ImageBackground
-				source={require('./backgroundLogo.jpg')}
+				source={require('../../assets/backgroundLogo.jpg')}
 				imageStyle={{
 					opacity : 0.1
 				}}
@@ -64,13 +64,15 @@ class AdminDetailsView extends Component {
 						<Text>{this.state.expoPushToken}</Text>
 						<Text
 							style={{ borderWidth: 1, padding: 10, borderRadius: 10 }}
-							onPress={() => this.props.navigation.navigate('List')}
+							onPress={() => this.props.navigation.navigate('BookingList')}
 						>
 							확인
 						</Text>
 					</View>
 				</View>
 			</ImageBackground>
+
+			
 		);
 	}
 }

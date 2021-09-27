@@ -1,6 +1,7 @@
 import React, {useState,useEffect } from 'react';
 import Loading from './src/Loading';
 import Navigation from './src/navigation';
+import * as Permissions from 'expo-permissions';
 
 export default function App() {
 	const [isLoading, setIsLoading] = useState(true);

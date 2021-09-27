@@ -5,7 +5,6 @@ import { TouchableHighlight } from 'react-native-gesture-handler';
 export default class UserDetailsView extends Component {
 	checkIfAvailable(check, disable, list) {
 		const navigation = this.props.navigation;
-		console.log('>>>', disable);
 		if (check == '수정') {
 			if (disable) Alert.alert('예약수정', '수정 불가합니다.');
 			else this.props.navigation.navigate('Update', { list: list,status:'update' });
@@ -19,7 +18,7 @@ export default class UserDetailsView extends Component {
 
 		return (
 			<ImageBackground
-				source={require('./backgroundLogo.jpg')}
+				source={require('../../assets/backgroundLogo.jpg')}
 				imageStyle={{
 					opacity : 0.1
 				}}

@@ -1,23 +1,21 @@
 import React, { useEffect,useState } from 'react';
 import { Alert } from 'react-native';
 import { Notifications } from 'expo';
-import ipcode from '../ipcode';
-import axios from 'axios';
 import BookingFormView from '../view/bookingFormView';
+import DataHandler from '../model/dataHandler';
 
 const BookingController = (props) => {
 	const [data, setData] = useState([]);
 	const [paper, setPaper] = useState('')
-	const { building,list,status } = props.route.params;
-	console.log("status", status, building, list);
+	const { building, list, status } = props.route.params;
+	const dataHandler = new DataHandler();
 
 	useEffect(() => {
 		fetchData();
 	}, [fetchData]);
 
 	const fetchData = async () => {
-		var ip = ipcode();
-		const { data } = await axios.get(`http://${ip}:3000/delivery`);
+		const data = await dataHandler.getDeliveryInfo();
 		getPaperInfo();
 		setData(data);
 	};
@@ -31,52 +29,37 @@ const BookingController = (props) => {
 		setPaper(paper);
 		
 	}
-	const checkPaper = (building, doc,prevPaper) => {
+	const checkPaper = (building, document,prevPaper) => {
 		let checking;
-		for (var i = 0; i < data.length; i++) {
+		for (let i = 0; i < data.length; i++) {
 			if (data[i].건물명 == building) {
-				checking = parseInt(doc) + parseInt(data[i].서류현황) - parseInt(prevPaper?prevPaper:0);
+				checking = parseInt(document) + parseInt(data[i].서류현황) - parseInt(prevPaper?prevPaper:0);
 				break;
 			}
 		}
-		if (doc <= 50 && checking <= 100) {
+		if (document <= 50 && checking <= 100) {
 			return 1;
 		} else {
 			return 0;
 		}
 	}
-	const checkInfo = (name, phone, desti_1, doc) => {
-		if (name != null && phone != null && desti_1 != null && doc != null) return true;
+	const checkInfo = (name, phone, destination, document) => {
+		if (name != null && phone != null && destination != null && document != null) return true;
 		else return false;
 	}
-	const update = async (name, phone, desti_1, doc) => {
+	const update = async (name, phone, destination, document) => {
 		if (name == null) name = list.이름;
 		if (phone == null) phone = list.전화번호;
-		if (desti_1 == null) desti_1 = list.배송지;
-		if (doc == null) doc = list.서류수량;
+		if (destination == null) destination = list.배송지;
+		if (document == null) document = list.서류수량;
 
-		var UserID = list.주문자번호;
-		var building = list.건물명;
-		var prevPaper = list.서류수량;
-		var ip = ipcode();
-		var checking = checkPaper(building, prevPaper, doc);
-		if (checking != 0) {
-			fetch(`http://${ip}:3000/update`, {
-				method  : 'POST',
-				headers : {
-					Accept         : 'application/json',
-					'Content-Type' : 'application/json'
-				},
-				body    : JSON.stringify({
-					UserID   : UserID,
-					Name     : name,
-					Phone    : phone,
-					desti_1  : desti_1,
-					doc      : doc,
-					finalDoc : checking,
-					building : building
-				})
-			});
+		let userId = list.주문자번호;
+		let building = list.건물명;
+		let prevPaper = list.서류수량;
+		let checking = checkPaper(building, prevPaper, document);
+	
+		if (checking !== 0) {
+			dataHandler.updateBooking(userId, name, phone, destination, document, building);
 			Alert.alert(
 				'예약정보수정',
 				'완료되었습니다',
@@ -85,12 +68,11 @@ const BookingController = (props) => {
 						text    : 'OK',
 						onPress : () => {
 							list.이름 = null;
-							props.navigation.navigate('ShowInfo', {
-								name       : name,
-								phone      : phone,
-								desti      : desti_1,
-								doc        : doc,
-								navigation : 'Mypage'
+							props.navigation.navigate('BooingInformation', {
+								name,
+								phone,
+								destination,
+								document
 							});
 						}
 					}
@@ -107,30 +89,13 @@ const BookingController = (props) => {
 		}
 	};
 
-	const upload = async (name, phone, desti_1, doc) => {
-		//this.getData();
-		console.log('saving..');
-		var ip = ipcode();
+	const upload = async (name, phone, destination, document) => {
 		let token = await Notifications.getExpoPushTokenAsync();
-		var checkInfoVAlue = checkInfo(name, phone, desti_1, doc);
-		var check = checkPaper(building, doc);
+		let checkInfoVAlue = checkInfo(name, phone, destination, document);
+		let check = checkPaper(building, document);
 		if (checkInfoVAlue) {
 			if (check == 1) {
-				fetch(`http://${ip}:3000/booking`, {
-					method: 'POST',
-					headers: {
-						Accept: 'application/json',
-						'Content-Type': 'application/json'
-					},
-					body: JSON.stringify({
-						Name: name,
-						Phone: phone,
-						desti_1: desti_1,
-						doc: doc,
-						building: building,
-						expoPushToken: token
-					})
-				});
+				dataHandler.uploadBooking(name, phone, destination,document, building, token);
 				Alert.alert(
 					'예약진행',
 					'완료되었습니다',
@@ -138,12 +103,11 @@ const BookingController = (props) => {
 						{
 							text: 'OK',
 							onPress: () => {
-								props.navigation.navigate('ShowInfo', {
-									name: name,
-									phone: phone,
-									desti: desti_1,
-									doc: doc,
-									navigation: 'User'
+								props.navigation.navigate('BookingInformation', {
+									name,
+									phone,
+									destination,
+									document
 								});
 							}
 						}

@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import { StyleSheet, View, Image, Text, TouchableOpacity, Button } from 'react-native';
+import React from 'react';
+import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native';
 
 class Home extends React.Component {
 	render() {
 		return (
 			<View style={styles.container}>
 				<View style={styles.icon}>
-					<Image style={{ width: 230, height: 230 }} source={require('./JUEUN.png')} />
+					<Image style={{ width: 230, height: 230 }} source={require('../assets/JUEUN.png')} />
 				</View>
 				<View style={styles.booking}>
 					<TouchableOpacity activeOpacity={0.8} style={styles.button}>

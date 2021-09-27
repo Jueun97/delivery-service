@@ -1,36 +1,13 @@
 import React, { Component } from 'react';
 import { Entypo, FontAwesome } from '@expo/vector-icons';
 import { StyleSheet, Text, View, TouchableHighlight, ImageBackground } from 'react-native';
-export default class ShowInfo extends Component {
-	setHeaderOptions(navigation) {
-		navigation.setOptions({
-			headerLeft  : () => (
-				<Entypo
-					name="home"
-					size={40}
-					color={'black'}
-					onPress={() => navigation.navigate('home')}
-					style={{ paddingLeft: 20 }}
-				/>
-			),
-			headerRight : () => (
-				<FontAwesome
-					name="user"
-					size={40}
-					color={'black'}
-					onPress={() => navigation.navigate('UserPassword', { status:'user' })}
-					style={{ paddingRight: 20 }}
-				/>
-			)
-		});
-	}
+class BookingInformationView extends Component {
 	render() {
-		const { name, phone, desti, doc, navigation } = this.props.route.params;
+		const { name, phone, destination, document } = this.props.data;
 		return (
-			this.setHeaderOptions(this.props.navigation),
 			(
 				<ImageBackground
-					source={require('./backgroundLogo.jpg')}
+					source={require('../../assets/backgroundLogo.jpg')}
 					imageStyle={{
 						opacity : 0.1
 					}}
@@ -71,7 +48,7 @@ export default class ShowInfo extends Component {
 								<View
 									style={{ flex: 2, justifyContent: 'center', alignItems: 'center', width: '100%' }}
 								>
-									<Text style={{ fontSize: 20, color: 'black' }}>{desti} </Text>
+									<Text style={{ fontSize: 20, color: 'black' }}>{destination} </Text>
 									<View
 										style={{ height: 1, backgroundColor: 'black', marginBottom: 10, width: '70%' }}
 									/>
@@ -84,7 +61,7 @@ export default class ShowInfo extends Component {
 								<View
 									style={{ flex: 2, justifyContent: 'center', alignItems: 'center', width: '100%' }}
 								>
-									<Text style={{ fontSize: 20, color: 'black' }}>{doc}</Text>
+									<Text style={{ fontSize: 20, color: 'black' }}>{document}</Text>
 									<View
 										style={{ height: 1, backgroundColor: 'black', marginBottom: 10, width: '70%' }}
 									/>
@@ -96,7 +73,7 @@ export default class ShowInfo extends Component {
 							<View style={styles.center}>
 								<TouchableHighlight
 									style={styles.button}
-									onPress={() => this.props.navigation.navigate(`${navigation}`)}
+									onPress={() => this.props.navigation.navigate('User',{status:'user'})}
 								>
 									<Text style={styles.textStyle}> 확인 </Text>
 								</TouchableHighlight>
@@ -108,7 +85,8 @@ export default class ShowInfo extends Component {
 			)
 		);
 	}
-}
+};
+export default BookingInformationView;
 
 const styles = StyleSheet.create({
 	container        : {

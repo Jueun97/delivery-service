@@ -1,43 +1,43 @@
-import React, { Component, useEffect, useState } from 'react';
-import axios from 'axios';
-import { StyleSheet, Alert } from 'react-native';
-import ipcode from '../ipcode';
+import React, { useEffect, useState } from 'react';
+import { Alert } from 'react-native';
 import PasswordView from '../view/passwordView';
+import DataHandler from '../model/dataHandler';
 
 const PasswordController = (props) => {
-	const [code, setCode] = useState('');
+	const [code, setCode] = useState(0);
 	const [adminData, setAdminData] = useState([]);
 	const [userData, setUserData] = useState([]);
 	const { status } = props.route.params;
-	const ip = ipcode();
+	const dataHandler = new DataHandler();
 
 	useEffect(() => {
 		if (status === 'admin')
-			fetchAminData();
+			fetchAdminData();
 		else
 			fetchUserData();
-	},[])
+	},[fetchAdminData,fetchUserData])
 
-	const fetchAminData = async () => {
-		const { data } = await axios.get(`http://${ip}:3000/admin`);
+	const fetchAdminData = async () => {
+		const data = await dataHandler.getAdminInfo();
 		setAdminData(data);
 	};
 	const fetchUserData = async () => {
-		const { data } = await axios.get(`http://${ip}:3000/User`);
+		const data = await dataHandler.getUserInfo();
 		setUserData(data);
 	};
 
 	const handlePassword = (text) => {
+		text = parseInt(text);
 		setCode(text);
 	};
 
 	const adminLogin = () => {
 		let check = 0;
 		for (var i = 0; i < adminData.length; i++) {
-			if (code == 2020000) {
+			if (code === 2020000) {
 				props.navigation.navigate('Status', { adminKey: adminData[i].건물명, status: 'status' });
 				check = 1;
-			} else if (code == adminData[i].관리자번호) {
+			} else if (code === adminData[i].관리자번호) {
 				check = 1;
 				props.navigation.navigate('Situation', { adminKey: adminData[i].건물명, status: 'situation' });
 			}

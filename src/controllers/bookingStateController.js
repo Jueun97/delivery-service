@@ -1,22 +1,22 @@
-import React, { useEffect,useState } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { Alert } from 'react-native';
 import StateView from '../view/bookingStateView';
 import StatusView from '../view/bookingStatusView';
-import UserView from '../view/user/UserView';
-import ipcode from '../ipcode';
+import UserView from '../view/UserView';
+import DataHandler from '../model/dataHandler';
 
 const BookingStateController = ({navigation,route}) => {
 	const [info, setInfo] = useState('');
 	const adminKey = route.params.adminKey;
 	const status = route.params.status;
-	const ip = ipcode();
+	const dataHandler = new DataHandler();
 
 	useEffect(() => {
 		fetchData();
 	}, [fetchData]);
 
 	const fetchData = async () => {
-		const { data } = await axios.get(`http://${ip}:3000/Delivery`);
+		const  data  = await dataHandler.getDeliveryInfo();
 		setInfo(data);
 	};
 	const bookingStateHandler = (building) => {
@@ -26,17 +26,7 @@ const BookingStateController = ({navigation,route}) => {
 				text    : 'OK',
 				onPress: () => {
 					Alert.alert('처리되었습니다.');
-					await fetch(`http:/${ip}:3000/User`, {
-						method: 'POST',
-						headers: {
-							Accept: 'application/json',
-							'Content-Type': 'application/json'
-						},
-						body: JSON.stringify({
-							Building: building,
-							Condition: '배송중'
-						})
-					});
+					dataHandler.updateAllBookingState(0, building, '배송중');
 				}
 			}
 		]);
@@ -45,7 +35,7 @@ const BookingStateController = ({navigation,route}) => {
 		<>
 			{status === 'situation' && <StateView data={info} adminKey={adminKey} navigation={navigation} />}
 			{status === 'status' && <StatusView data={info} adminKey={adminKey} navigation={navigation} bookingStateHandler={bookingStateHandler} />}
-			{status === 'user' && 	<UserView info={info} navigation={props.navigation} />}
+			{status === 'user' && 	<UserView info={info} navigation={navigation} />}
 		</>
 	)
 

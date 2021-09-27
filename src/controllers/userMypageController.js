@@ -1,7 +1,6 @@
 import React, { useState,useEffect } from 'react';
-import axios from 'axios';
-import ipcode from '../ipcode';
 import MypageView from '../view/userMypageView';
+import DataHandler from '../model/dataHandler';
 
 const UserMypageController = (props) => {
 	const [info, setInfo] = useState('');
@@ -12,8 +11,8 @@ const UserMypageController = (props) => {
 	});
 
 	fetchData = async () => {
-		var ip = ipcode();
-		const { data } = await axios.get(`http://${ip}:3000/User`);
+		const dataHandler = new DataHandler();
+		const data = await dataHandler.getUserInfo();
 		setInfo(data);
 	};
 
