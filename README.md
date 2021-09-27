@@ -5,20 +5,15 @@
 ## 사용 기술
 ### 1. Front-end
 
-|<img src="/readme/logo/html.png" width="150">|<img src="/readme/logo/css.png" width="150">|<img src="/readme/logo/js.png" width="150">|
-|:---: |:---: |:---:|
-|HTML|PostCSS|Javascript|
+|<img src="/readme/logo/html.png" width="150">|<img src="/readme/logo/css.png" width="150">|<img src="/readme/logo/js.png" width="150">|<img src="/readme/logo/react-native.png" width="150">|
+|:---: |:---: |:---:|:---:|
+|HTML|PostCSS|Javascript|React Native|
 
 
 ### 2. Back-end
 |<img src="/readme/logo/node.png" width="150" height="150">|<img src="/readme/logo/express.png" width="150" height="150">|<img src="/readme/logo/mysql.png" width="150" height="150">|
 |:---:|:--:|:--:|
 |Node.js|Express|MySQL|
-
-### 3. Library
-|<img src="/readme/logo/react-native.png" width="150">|
-|:--:|
-|React Native|
 
 <br>
 
@@ -55,19 +50,15 @@
 >- 예약 완료 후 예약 정보 확인 가능
 
 #### 1.2 예약 정보 확인
-|마이페이지 접속|예약 리스트 확인 | 
-|:---:|:--:|:--:|
-|<img src="/readme/images/userPassword.jpg" height="300">|<img src="/readme/images/userBookingList.jpg"  height="300">|<img src="/readme/images/map.jpg"  height="300">|
+|마이페이지 접속|예약 리스트 확인 |예약 정보 확인 및 수정 / 삭제|배송 위치 추적|
+|:---:|:--:|:---:|:--:|
+|<img src="/readme/images/userPassword.jpg" height="300">|<img src="/readme/images/userBookingList.jpg"  height="300">|<img src="/readme/images/userDetails.jpg"  height="300">|<img src="/readme/images/map.jpg"  height="300">|
 >- 헤더의 오른쪽 아이콘 (유저 아이콘) 클릭 시 마이페이지로 이동
 >- 마이페이지에서 본인이 예약한 배송의 배송현황 및 배송상태 확인 가능
-
-|예약 정보 확인 및 수정 / 삭제|배송 위치 추적|
-|:---:|:--:|:--:|
-|<img src="/readme/images/userDetails.jpg"  height="300">|<img src="/readme/images/map.jpg"  height="300">|
-
 >- 예약 리스트에서 원하는 예약 정보 클릭 시 예약 상세 정보 확인 가능
 >- 예약 상세 정보 페이지에서 예약 수정 및 삭제 가능
 >- 예약 리스트에서 배송현황 아이콘 클릭 시 배송 위치 추적 가능 (배송중일때)
+
 ### 3. 관리자모드
 |메인화면|관리자코드 입력 |
 |:---:|:--:|
