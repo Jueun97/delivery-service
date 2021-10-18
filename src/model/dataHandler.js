@@ -24,12 +24,12 @@ class DataHandler {
 
 	async updateBooking(userId, name, phone, destination, document, building) {
 		const data = { userId, name, phone, destination, document, building };
-		axios.post(`http://${this.ip}:3000/booking__update`, data).then(response => response.data);
+		axios.put(`http://${this.ip}:3000/booking`, data).then(response => response.data);
 	};
 
 	async deleteBooking(userId, document, building) {
-		const data = { userId, document, building };
-		await axios.post(`http://${this.ip}:3000/booking__delete`, data);
+		const data = { document, building };
+		await axios.delete(`http://${this.ip}:3000/booking/${userId}`, data);
 	};
 	async updateAllBookingState(userId, building, state) {
 		const data = { userId, building, state };

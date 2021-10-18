@@ -137,7 +137,7 @@ app.post('/booking', function(req, res) {
 		}
 	});
 });
-app.post('/booking__update', function(req, res) {
+app.put('/booking', function(req, res) {
 	let userId = req.body.userId;
 	let name = req.body.name;
 	let phone = req.body.phone;
@@ -184,8 +184,8 @@ app.post('/booking__update', function(req, res) {
 		}
 	});
 });
-app.post('/booking__delete', function(req, res) {
-	let userId = req.body.userId;
+app.delete('/booking/:userId', function(req, res) {
+	let userId = req.params.userId;
 	let document = req.body.document;
 	let building = req.body.building;
 	let totalBooking,totalPaper,paper = 0
